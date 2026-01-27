@@ -6,17 +6,17 @@ const History = () => {
         {
             year: '1971',
             title: 'Founded in London',
-            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.'
+            desc: 'Established with a vision to provide accessible legal excellence, tackling our first major pro-bono cases that defined our values.'
         },
         {
             year: '1986',
             title: 'Firm Expansion',
-            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.'
+            desc: 'Opened new offices across Europe and Asia, growing our team of dedicated attorneys to serve a global clientele with local expertise.'
         },
         {
             year: '1991',
             title: 'Landmark Case Victory',
-            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.'
+            desc: 'Secured a pivotal win in the Supreme Court that set a new precedent for corporate accountability and environmental protection.'
         }
     ];
 

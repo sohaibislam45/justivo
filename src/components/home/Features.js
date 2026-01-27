@@ -12,7 +12,7 @@ const Features = () => {
                             Driving impact through global legal initiatives
                         </h2>
                         <p className="text-gray-500 leading-relaxed text-sm">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                            Our team is dedicated to safeguarding your rights and ensuring justice is served through strategic litigation and expert counsel across all jurisdictions.
                         </p>
                     </div>
 
