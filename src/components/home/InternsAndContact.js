@@ -1,52 +1,8 @@
 "use client";
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const InternsAndContact = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        area: 'Business Law',
-        message: ''
-    });
-    const [errors, setErrors] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setSubmitStatus(null);
-
-        if (!validateForm()) return;
-
-        setIsSubmitting(true);
-
-        // Simulate API call
-        try {
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            setSubmitStatus('success');
-            setFormData({ name: '', email: '', area: 'Business Law', message: '' });
-            setErrors({});
-        } catch (error) {
-            setSubmitStatus('error');
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-        // Clear error when user starts typing
-        if (errors[name]) {
-            setErrors(prev => ({ ...prev, [name]: '' }));
-        }
-    };
-
     return (
         <section className="bg-white">
             {/* Interns Section */}
