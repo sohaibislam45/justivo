@@ -1,12 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import TopBar from './TopBar';
 
 const Navbar = () => {
     return (
+        <>
+        <TopBar />
         <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100">
             <div className="container mx-auto px-6 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <Image src="/images/logo.png" alt="Justivo Logo" width={120} height={40} className="object-contain" />
+                    <Image src="/images/logo.png" alt="Justivo Logo" width={51} height={50} className="object-contain" />
                 </div>
 
                 <div className="hidden md:flex items-center gap-8 text-sm font-medium text-secondary">
@@ -43,6 +46,7 @@ const Navbar = () => {
                 </Link>
             </div>
         </nav>
+        </>
     );
 };
 
