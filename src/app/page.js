@@ -1,7 +1,8 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/home/Hero";
-import CompanyHistory from "@/components/home/CompanyHistory";
 import History from "@/components/home/History";
+import Features from "@/components/home/Features";
+
 import Testimonial from "@/components/home/Testimonial";
 import AwardsMarquee from "@/components/home/AwardsMarquee";
 import CaseStudies from "@/components/home/CaseStudies";
@@ -18,6 +19,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Features />
         <History />
         <Testimonial />
         <AwardsMarquee />
@@ -25,7 +27,6 @@ export default function Home() {
         <Team />
         <ActionBanner />
         <StatsList />
-        <CompanyHistory />
         <InternsAndContact />
         <News />
       </main>

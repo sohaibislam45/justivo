@@ -21,11 +21,11 @@ const History = () => {
     ];
 
     return (
-        <section className="py-24 bg-white">
+        <section className="pt-5 pb-20 bg-white ">
             <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-stretch">
                     {/* Left Column - Images */}
-                    <div className="space-y-8 flex flex-col justify-center">
+                    <div className="space-y-8 flex flex-col justify-between h-full py-3">
                         {/* Top Image - Scales */}
                         <div className="relative h-[400px] w-full bg-gray-100 rounded-sm overflow-hidden group">
                             <Image
@@ -46,7 +46,7 @@ const History = () => {
                     </div>
 
                     {/* Right Column - Content */}
-                    <div className="flex flex-col justify-center lg:pl-10">
+                    <div className="flex flex-col justify-between h-full lg:pl-10 relative">
                         {/* Section Heading */}
                         <div className="mb-20">
                             <h2 className="text-4xl lg:text-5xl font-forum leading-tight text-secondary max-w-lg">
@@ -56,14 +56,21 @@ const History = () => {
 
                         {/* Timeline Wrapper */}
                         <div className="relative">
-                            {/* Optional Right Arrows - purely decorative based on screenshot */}
-                            <div className="absolute -right-6 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-8 text-gray-300">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="rotate-0"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="rotate-0"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
+                            {/* Decorative Side Elements */}
+                            <div className="absolute right-0 top-0 h-full flex flex-col items-center justify-center hidden xl:flex translate-x-1/2">
+                                <div className="relative w-[1px] h-3/4">
+                                    <Image src="/images/border.png" alt="border" fill className="object-cover" />
+                                </div>
+                                <div className="absolute top-[40%] -right-10 translate-x-full">
+                                    <Image src="/images/arrow-left-1.png" alt="arrow up" width={85} height={65} className="object-contain " />
+                                </div>
+                                <div className="absolute bottom-[40%] -right-10 translate-x-full">
+                                    <Image src="/images/arrow-left.png" alt="arrow down" width={3085} height={65} className="object-contain" />
+                                </div>
                             </div>
 
                             {/* Timeline Items */}
-                            <div className="space-y-16">
+                            <div className="space-y-16 pr-10">
                                 {timelineItems.map((item, index) => (
                                     <div key={index} className="group">
                                         <div className="space-y-4">
