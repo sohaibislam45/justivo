@@ -11,7 +11,7 @@ const Hero = () => {
                     <div className="max-w-5xl">
                         <h1 className="text-7xl md:text-9xl lg:text-[130px] font-forum leading-[0.85] text-secondary tracking-tight">
                             Justice. Advocacy.<br />
-                            <div className="text-primary mt-8">Results.</div>
+                            <div className="text-primary md:mt-8">Results.</div>
                         </h1>
                     </div>
 
