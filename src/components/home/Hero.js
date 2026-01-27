@@ -42,11 +42,26 @@ const Hero = () => {
                 {/* Social Sidebar */}
                 <div className="hidden xl:flex flex-col items-center absolute -left-20 top-1/2 -translate-y-1/2 z-20">
                     <div className="flex flex-col gap-10 text-[13px] uppercase tracking-[0.2em] font-medium text-black">
-                        <a href="#" className="hover:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-90 opacity-70 hover:opacity-100">Dribbble</a>
-                        <a href="#" className="hover:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-90 opacity-70 hover:opacity-100">Behance</a>
-                        <a href="#" className="hover:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-90 opacity-70 hover:opacity-100">Github</a>
-                        <a href="#" className="hover:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-90 opacity-70 hover:opacity-100">Linkedin</a>
-                        <a href="#" className="hover:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-90 opacity-70 hover:opacity-100">Facebook</a>
+                        <a href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
+                            Dribbble
+                            <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
+                        </a>
+                        <a href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
+                            Behance
+                            <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
+                        </a>
+                        <a href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
+                            Github
+                            <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
+                        </a>
+                        <a href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
+                            Linkedin
+                            <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
+                        </a>
+                        <a href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
+                            Facebook
+                            <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
+                        </a>
                     </div>
                 </div>
 
