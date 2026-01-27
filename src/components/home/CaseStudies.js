@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const CaseStudies = () => {
     const cases = [
@@ -13,12 +14,11 @@ const CaseStudies = () => {
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                     <div className="space-y-4">
-                        <span className="text-primary font-medium tracking-widest uppercase text-sm">Our Work</span>
                         <h2 className="text-4xl md:text-5xl font-forum text-secondary">Case Studies</h2>
                     </div>
-                    <button className="text-secondary border-b border-primary pb-1 font-medium hover:text-primary transition-colors">
+                    <Link href="#" className="text-secondary border-b border-primary pb-1 font-medium hover:text-primary transition-colors">
                         View All Projects
-                    </button>
+                    </Link>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
