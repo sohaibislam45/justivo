@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const ActionBanner = () => {
     return (
@@ -21,9 +22,9 @@ const ActionBanner = () => {
                     <p className="text-white/80 text-lg max-w-xl mx-auto">
                         We believe in justice for all. Our firm dedicates over 5,000 hours annually to pro-bono work and international human rights causes.
                     </p>
-                    <button className="bg-primary hover:bg-white hover:text-secondary text-white px-10 py-4 rounded-sm transition-all text-sm font-medium tracking-widest uppercase mt-4">
+                    <Link href="/about" className="bg-primary hover:bg-white hover:text-secondary text-white px-10 py-4 rounded-sm transition-all text-sm font-medium tracking-widest uppercase mt-4">
                         Our Mission
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>
