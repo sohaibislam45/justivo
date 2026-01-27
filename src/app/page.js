@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/home/Hero";
+import CompanyHistory from "@/components/home/CompanyHistory";
 import History from "@/components/home/History";
 import Testimonial from "@/components/home/Testimonial";
 import AwardsMarquee from "@/components/home/AwardsMarquee";
@@ -24,6 +25,7 @@ export default function Home() {
         <Team />
         <ActionBanner />
         <StatsList />
+        <CompanyHistory />
         <InternsAndContact />
         <News />
       </main>

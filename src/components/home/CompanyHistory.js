@@ -1,7 +1,7 @@
 
 import Image from 'next/image';
 
-const History = () => {
+const CompanyHistory = () => {
     const timelineItems = [
         {
             year: '1971',
@@ -30,6 +30,7 @@ const History = () => {
                         <div className="relative h-[400px] w-full bg-gray-100 rounded-sm overflow-hidden group">
                             <Image
                                 src="/images/timeline-1.png"
+                                alt="Scales of Justice"
                                 fill
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
@@ -95,4 +96,4 @@ const History = () => {
     );
 };
 
-export default History;
+export default CompanyHistory;
