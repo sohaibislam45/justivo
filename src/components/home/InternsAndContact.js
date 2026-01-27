@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const InternsAndContact = () => {
     const [formData, setFormData] = useState({
@@ -12,20 +13,6 @@ const InternsAndContact = () => {
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
-
-    const validateForm = () => {
-        const newErrors = {};
-        if (!formData.name.trim()) newErrors.name = 'Name is required';
-        if (!formData.email.trim()) {
-            newErrors.email = 'Email is required';
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            newErrors.email = 'Email is invalid';
-        }
-        if (!formData.message.trim()) newErrors.message = 'Message is required';
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -71,12 +58,12 @@ const InternsAndContact = () => {
                             Become our intern and gain hands-on experience working on impactful global legal and advocacy projects. This is your chance to learn, grow, and contribute to meaningful initiatives that drive real change
                         </p>
                         <div className="pt-8">
-                            <button className="bg-primary hover:bg-[#A86D52] text-white px-10 py-4 rounded-sm transition-all duration-300 flex items-center gap-3 mx-auto uppercase tracking-widest text-sm font-medium">
+                            <Link href="/contact" className="bg-primary hover:bg-[#A86D52] text-white w-[230px] mx-auto px-6 py-4 rounded-sm transition-all duration-300 flex items-center justify-center gap-3 tracking-widest text-sm font-medium">
                                 Free Consultation
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

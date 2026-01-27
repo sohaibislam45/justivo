@@ -5,6 +5,7 @@ import Features from "@/components/home/Features";
 
 import Testimonial from "@/components/home/Testimonial";
 import AwardsMarquee from "@/components/home/AwardsMarquee";
+import InfoMarquee from "@/components/home/InfoMarquee";
 import CaseStudies from "@/components/home/CaseStudies";
 import Team from "@/components/home/Team";
 import ActionBanner from "@/components/home/ActionBanner";
@@ -22,6 +23,7 @@ export default function Home() {
         <Features />
         <History />
         <InternsAndContact />
+        <InfoMarquee />
         <Testimonial />
         <AwardsMarquee />
         <CaseStudies />
