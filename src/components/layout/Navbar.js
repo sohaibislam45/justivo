@@ -10,32 +10,33 @@ const Navbar = () => {
 
     return (
         <>
-        <TopBar />
-        <nav className="sticky top-0 z-50 w-full bg-white/90 text-black shadow-sm">
-            <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-                <div className='flex items-center gap-3'>
-                    <div className="flex items-center">
-                    <Image src="/images/logo.png" alt="Justivo Logo" width={51} height={50} className="object-contain" />
-                </div>
-                <div className="text-2xl font-base font-[24px] text-black">Justivo</div>
-                </div>
-                <div className="hidden md:flex items-center gap-8 text-base font-medium text-black">
-                    <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-                    <Link href="/about" className="hover:text-primary transition-colors">About Us</Link>
-                    <Link href="/services" className="hover:text-primary transition-colors">Practice Areas</Link>
-                    <Link href="/team" className="hover:text-primary transition-colors">Our Team</Link>
-                    <Link href="/blog" className="hover:text-primary transition-colors">Case Studies</Link>
-                    <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
-                </div>
+            <TopBar />
+            <nav className="sticky top-0 z-50 w-full bg-white/90 text-black shadow-sm">
+                <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+                    <div className='flex items-center gap-3'>
+                        <div className="flex items-center">
+                            <Image src="/images/logo.png" alt="Justivo Logo" width={51} height={50} className="object-contain" />
+                        </div>
+                        <div className="text-3xl font-base font-[24px] text-black">Justivo</div>
+                    </div>
+                    <div className="hidden md:flex items-center gap-8 text-xl font-medium text-black">
+                        <Link href="/" className="inline-block hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95">Home</Link>
+                        <Link href="/about" className="inline-block hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95">About Us</Link>
+                        <Link href="/services" className="inline-block hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95">Practice Areas</Link>
+                        <Link href="/team" className="inline-block hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95">Our Team</Link>
+                        <Link href="/blog" className="inline-block hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95">Case Studies</Link>
+                        <Link href="/contact" className="inline-block hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95">Blog</Link>
+                        <Link href="/contact" className="inline-block hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95">Contact</Link>
+                        <Link
+                            href={isLoggedIn ? "/dashboard" : "/login"}
+                            className="inline-block bg-black hover:bg-black/60 text-white px-6 py-2 rounded-sm transition-all duration-300 hover:scale-110 active:scale-95 text-base tracking-widest uppercase text-center"
+                        >
+                            {isLoggedIn ? "Dashboard" : "Free Consultation"}
+                        </Link>
+                    </div>
 
-                <Link 
-                    href={isLoggedIn ? "/dashboard" : "/login"} 
-                    className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-sm transition-all text-xs font-bold tracking-widest uppercase"
-                >
-                    {isLoggedIn ? "Dashboard" : "Free Consultation"}
-                </Link>
-            </div>
-        </nav>
+                </div>
+            </nav>
         </>
     );
 };
