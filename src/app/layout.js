@@ -22,13 +22,17 @@ export const metadata = {
   description: "A premium law firm dedicated to providing excellent legal services.",
 };
 
+import { AuthProvider } from "@/context/AuthContext";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${forum.variable} antialiased`}
       >
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

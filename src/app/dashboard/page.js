@@ -1,14 +1,36 @@
 "use client";
+import React, { useEffect } from 'react';
 import Sidebar from "@/components/dashboard/Sidebar";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
+    const { user, loading } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!loading && !user) {
+            router.push('/login');
+        }
+    }, [user, loading, router]);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#FAF9F6]">
+                <div className="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+            </div>
+        );
+    }
+
+    if (!user) return null;
+
     return (
         <div className="flex min-h-screen bg-[#FAF9F6]">
             <Sidebar />
             <div className="flex-1 flex flex-col">
                 <DashboardNavbar />
-                
+
                 <main className="p-8 space-y-12">
                     {/* Overview Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -45,8 +67,8 @@ export default function Dashboard() {
                             <div className="h-64 flex items-end justify-between gap-4">
                                 {[40, 70, 45, 90, 65, 80].map((h, i) => (
                                     <div key={i} className="flex-1 bg-[#FAF9F6] relative group rounded-t-sm">
-                                        <div 
-                                            style={{ height: `${h}%` }} 
+                                        <div
+                                            style={{ height: `${h}%` }}
                                             className="absolute bottom-0 w-full bg-secondary group-hover:bg-primary transition-all duration-500"
                                         ></div>
                                         <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -121,7 +143,7 @@ export default function Dashboard() {
                                             </td>
                                             <td className="px-8 py-6">
                                                 <button className="text-secondary hover:text-primary transition-colors">
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14m-7-7v14"/></svg>
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14m-7-7v14" /></svg>
                                                 </button>
                                             </td>
                                         </tr>

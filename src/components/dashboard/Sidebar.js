@@ -9,8 +9,6 @@ const Sidebar = () => {
     const menuItems = [
         { name: 'Overview', path: '/dashboard', icon: '📊' },
         { name: 'My Cases', path: '/dashboard/cases', icon: '💼' },
-        { name: 'Legal Documents', path: '/dashboard/docs', icon: '📄' },
-        { name: 'Messages', path: '/dashboard/messages', icon: '💬' },
         { name: 'Profile Settings', path: '/dashboard/profile', icon: '👤' },
     ];
 
@@ -35,12 +33,6 @@ const Sidebar = () => {
                 ))}
             </nav>
 
-            <div className="px-8 pt-8 border-t border-white/5">
-                <button className="flex items-center gap-4 text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-all">
-                    <span>🚪</span>
-                    Logout
-                </button>
-            </div>
         </aside>
     );
 };

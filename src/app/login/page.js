@@ -2,29 +2,56 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAuth } from '@/context/AuthContext';
+import { FcGoogle } from 'react-icons/fc';
+import { HiEye, HiEyeOff } from 'react-icons/hi';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+    const { login, googleSignIn } = useAuth();
+    const router = useRouter();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        // Mock login
-        setTimeout(() => {
+        setError('');
+        try {
+            await login(email, password);
+            router.push('/dashboard');
+        } catch (err) {
+            console.error(err);
+            setError('Invalid email or password. Please try again.');
+        } finally {
             setIsLoading(false);
-            window.location.href = '/dashboard';
-        }, 1500);
+        }
+    };
+
+    const handleGoogleSignIn = async () => {
+        setIsLoading(true);
+        setError('');
+        try {
+            await googleSignIn();
+            router.push('/dashboard');
+        } catch (err) {
+            console.error(err);
+            setError('Failed to sign in with Google.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const fillDemo = (role) => {
         if (role === 'admin') {
-            setEmail('admin@justivo.com');
-            setPassword('admin123');
+            setEmail('demoadmin@gmail.com');
+            setPassword('demoadmin123');
         } else {
-            setEmail('user@justivo.com');
-            setPassword('user123');
+            setEmail('demouser@gmail.com');
+            setPassword('demouser123');
         }
     };
 
@@ -37,9 +64,9 @@ export default function Login() {
                         <Image src="/images/logo.png" alt="Justivo Logo" width={140} height={40} className="brightness-0 invert" />
                     </Link>
                 </div>
-                
+
                 <div className="relative z-10 space-y-6">
-                    <h1 className="text-5xl font-forum text-white leading-tight">Welcome back to <br/> our legal portal.</h1>
+                    <h1 className="text-5xl font-forum text-white leading-tight">Welcome back to <br /> our legal portal.</h1>
                     <p className="text-white/60 max-w-sm">Access your case documents, track progress, and communicate with your legal team.</p>
                 </div>
 
@@ -62,15 +89,21 @@ export default function Login() {
                         <p className="text-gray-500">New to Justivo? <Link href="/register" className="text-primary font-bold hover:underline">Create an account</Link></p>
                     </div>
 
+                    {error && (
+                        <div className="bg-red-50 text-red-600 p-4 rounded-sm text-xs font-bold uppercase tracking-widest border border-red-100">
+                            {error}
+                        </div>
+                    )}
+
                     <form onSubmit={handleLogin} className="space-y-6 text-sm">
                         <div className="space-y-2">
                             <label className="text-xs uppercase tracking-widest text-gray-400 font-bold">Email Address</label>
-                            <input 
-                                type="email" 
+                            <input
+                                type="email"
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary transition-all" 
+                                className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary transition-all"
                                 placeholder="name@example.com"
                             />
                         </div>
@@ -79,18 +112,28 @@ export default function Login() {
                                 <label className="text-xs uppercase tracking-widest text-gray-400 font-bold">Password</label>
                                 <Link href="#" className="text-[10px] uppercase font-bold text-gray-400 hover:text-primary">Forgot Password?</Link>
                             </div>
-                            <input 
-                                type="password" 
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary transition-all" 
-                                placeholder="••••••••"
-                            />
+                            <div className="relative">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary transition-all pr-12"
+                                    placeholder="••••••••"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary transition-colors focus:outline-none"
+                                >
+                                    {showPassword ? <HiEyeOff className="text-xl" /> : <HiEye className="text-xl" />}
+                                </button>
+                            </div>
                         </div>
 
-                        <button 
+                        <button
                             disabled={isLoading}
+                            type="submit"
                             className="w-full bg-secondary hover:bg-primary text-white py-4 rounded-sm transition-all text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2"
                         >
                             {isLoading ? (
@@ -108,12 +151,14 @@ export default function Login() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                        <button className="flex items-center justify-center gap-3 bg-white border border-gray-100 py-3 rounded-sm hover:border-primary transition-all text-xs font-bold uppercase tracking-widest text-secondary">
+                    <div className="grid grid-cols-1 gap-4">
+                        <button
+                            onClick={handleGoogleSignIn}
+                            disabled={isLoading}
+                            className="flex items-center justify-center gap-3 bg-white border border-gray-100 py-3 rounded-sm hover:border-primary transition-all text-xs font-bold uppercase tracking-widest text-secondary"
+                        >
+                            <FcGoogle className="text-lg" />
                             <span>Google</span>
-                        </button>
-                        <button className="flex items-center justify-center gap-3 bg-white border border-gray-100 py-3 rounded-sm hover:border-primary transition-all text-xs font-bold uppercase tracking-widest text-secondary">
-                            <span>Facebook</span>
                         </button>
                     </div>
 

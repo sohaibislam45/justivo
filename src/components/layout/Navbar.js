@@ -4,11 +4,12 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import TopBar from './TopBar';
+import { useAuth } from '@/context/AuthContext';
 
 const Navbar = () => {
     const pathname = usePathname();
-    // Mocked logged-in state
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { user } = useAuth();
+    const isLoggedIn = !!user;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const navLinks = [

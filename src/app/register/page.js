@@ -2,17 +2,50 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAuth } from '@/context/AuthContext';
+import { FcGoogle } from 'react-icons/fc';
+import { HiEye, HiEyeOff } from 'react-icons/hi';
+import { useRouter } from 'next/navigation';
 
 export default function Register() {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+    const { register, googleSignIn } = useAuth();
+    const router = useRouter();
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        setTimeout(() => {
+        setError('');
+        try {
+            const displayName = `${firstName} ${lastName}`.trim();
+            await register(email, password, displayName);
+            router.push('/dashboard');
+        } catch (err) {
+            console.error(err);
+            setError(err.message || 'Failed to create an account. Please try again.');
+        } finally {
             setIsLoading(false);
-            window.location.href = '/login';
-        }, 1500);
+        }
+    };
+
+    const handleGoogleSignIn = async () => {
+        setIsLoading(true);
+        setError('');
+        try {
+            await googleSignIn();
+            router.push('/dashboard');
+        } catch (err) {
+            console.error(err);
+            setError('Failed to sign up with Google.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -24,9 +57,9 @@ export default function Register() {
                         <Image src="/images/logo.png" alt="Justivo Logo" width={140} height={40} className="brightness-0 invert" />
                     </Link>
                 </div>
-                
+
                 <div className="relative z-10 space-y-6">
-                    <h1 className="text-5xl font-forum text-white leading-tight">Start your journey <br/> with Justivo.</h1>
+                    <h1 className="text-5xl font-forum text-white leading-tight">Start your journey <br /> with Justivo.</h1>
                     <p className="text-white/60 max-w-sm">Join thousands of clients who trust us with their legal representation and advisory needs.</p>
                 </div>
 
@@ -49,24 +82,67 @@ export default function Register() {
                         <p className="text-gray-500">Already have an account? <Link href="/login" className="text-primary font-bold hover:underline">Sign in here</Link></p>
                     </div>
 
+                    {error && (
+                        <div className="bg-red-50 text-red-600 p-4 rounded-sm text-xs font-bold uppercase tracking-widest border border-red-100">
+                            {error}
+                        </div>
+                    )}
+
                     <form onSubmit={handleRegister} className="space-y-6 text-sm">
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <label className="text-xs uppercase tracking-widest text-gray-400 font-bold">First Name</label>
-                                <input type="text" required className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary" placeholder="John" />
+                                <input
+                                    type="text"
+                                    required
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary"
+                                    placeholder="Shohaib"
+                                />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs uppercase tracking-widest text-gray-400 font-bold">Last Name</label>
-                                <input type="text" required className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary" placeholder="Doe" />
+                                <input
+                                    type="text"
+                                    required
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary"
+                                    placeholder="Islam"
+                                />
                             </div>
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs uppercase tracking-widest text-gray-400 font-bold">Email Address</label>
-                            <input type="email" required className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary" placeholder="name@example.com" />
+                            <input
+                                type="email"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary"
+                                placeholder="name@example.com"
+                            />
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs uppercase tracking-widest text-gray-400 font-bold">Password</label>
-                            <input type="password" required className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary" placeholder="••••••••" />
+                            <div className="relative">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="w-full bg-white border border-gray-100 px-6 py-4 rounded-sm focus:outline-none focus:border-primary text-secondary pr-12"
+                                    placeholder="••••••••"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary transition-colors focus:outline-none"
+                                >
+                                    {showPassword ? <HiEyeOff className="text-xl" /> : <HiEye className="text-xl" />}
+                                </button>
+                            </div>
                         </div>
 
                         <div className="flex items-start gap-3 pt-2">
@@ -76,8 +152,9 @@ export default function Register() {
                             </label>
                         </div>
 
-                        <button 
+                        <button
                             disabled={isLoading}
+                            type="submit"
                             className="w-full bg-secondary hover:bg-primary text-white py-4 rounded-sm transition-all text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2"
                         >
                             {isLoading ? (
@@ -95,12 +172,14 @@ export default function Register() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                        <button className="flex items-center justify-center gap-3 bg-white border border-gray-100 py-3 rounded-sm hover:border-primary transition-all text-xs font-bold uppercase tracking-widest text-secondary">
+                    <div className="grid grid-cols-1 gap-4">
+                        <button
+                            onClick={handleGoogleSignIn}
+                            disabled={isLoading}
+                            className="flex items-center justify-center gap-3 bg-white border border-gray-100 py-3 rounded-sm hover:border-primary transition-all text-xs font-bold uppercase tracking-widest text-secondary"
+                        >
+                            <FcGoogle className="text-lg" />
                             <span>Google</span>
-                        </button>
-                        <button className="flex items-center justify-center gap-3 bg-white border border-gray-100 py-3 rounded-sm hover:border-primary transition-all text-xs font-bold uppercase tracking-widest text-secondary">
-                            <span>Facebook</span>
                         </button>
                     </div>
                 </div>
