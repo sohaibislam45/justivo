@@ -1,5 +1,7 @@
-
+"use client";
+import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const History = () => {
     const timelineItems = [
@@ -20,39 +22,84 @@ const History = () => {
         }
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.3 }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, x: 50 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.8, ease: "easeOut" }
+        }
+    };
+
+    const imageVariantsLeft = {
+        hidden: { opacity: 0, x: -50 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 1, ease: "easeOut" }
+        }
+    };
+
     return (
-        <section className="pt-5 pb-20 bg-white ">
+        <section className="pt-5 pb-20 bg-white overflow-hidden">
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-stretch">
                     {/* Left Column - Images */}
                     <div className="space-y-8 flex flex-col justify-between h-full py-3">
                         {/* Top Image - Scales */}
-                        <div className="relative h-[400px] w-full bg-gray-100 rounded-sm overflow-hidden group">
+                        <motion.div
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="relative h-[400px] w-full bg-gray-100 rounded-sm overflow-hidden group"
+                        >
                             <Image
                                 src="/images/timeline-1.png"
+                                alt="Law firm history timeline illustration"
                                 fill
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
-                        </div>
+                        </motion.div>
                         {/* Bottom Image - Lawyer */}
-                        <div className="relative h-[500px] w-full bg-gray-100 rounded-sm overflow-hidden group">
+                        <motion.div
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="relative h-[500px] w-full bg-gray-100 rounded-sm overflow-hidden group"
+                        >
                             <Image
                                 src="/images/timeline-2.png"
                                 alt="Lawyer walking outside court"
                                 fill
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
-                        </div>
+                        </motion.div>
                     </div>
 
                     {/* Right Column - Content */}
                     <div className="flex flex-col justify-between h-full lg:pl-10 relative">
                         {/* Section Heading */}
-                        <div className="mb-20">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="mb-20"
+                        >
                             <h2 className="text-4xl lg:text-5xl font-forum leading-tight text-secondary max-w-lg">
                                 Serving clients in every area of law since 1971 with experience and dedication.
                             </h2>
-                        </div>
+                        </motion.div>
 
                         {/* Timeline Wrapper */}
                         <div className="relative">
@@ -70,9 +117,15 @@ const History = () => {
                             </div>
 
                             {/* Timeline Items */}
-                            <div className="space-y-16 pr-10">
+                            <motion.div
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={containerVariants}
+                                className="space-y-16 pr-10"
+                            >
                                 {timelineItems.map((item, index) => (
-                                    <div key={index} className="group">
+                                    <motion.div key={index} variants={itemVariants} className="group">
                                         <div className="space-y-4">
 
                                             {/* Year */}
@@ -91,9 +144,9 @@ const History = () => {
                                                 {item.desc}
                                             </p>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 ))}
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
@@ -103,3 +156,4 @@ const History = () => {
 };
 
 export default History;
+

@@ -1,22 +1,81 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
 
 const Hero = () => {
+    const titleRef = useRef(null);
+
+    useEffect(() => {
+        const words = titleRef.current.querySelectorAll('.animate-word');
+        gsap.fromTo(words,
+            { y: 100, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.1,
+                ease: "power4.out",
+                delay: 0.2
+            }
+        );
+    }, []);
+
+    const sidebarVariants = {
+        hidden: { opacity: 0, x: -50 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.8, delay: 0.8, ease: "easeOut" }
+        }
+    };
+
+    const imageVariants = {
+        hidden: { scale: 1.1, opacity: 0 },
+        visible: {
+            scale: 1,
+            opacity: 1,
+            transition: { duration: 1.5, ease: "easeOut" }
+        }
+    };
+
+    const rotatingTextVariants = {
+        hidden: { scale: 0, opacity: 0 },
+        visible: {
+            scale: 1,
+            opacity: 1,
+            transition: { duration: 0.8, delay: 1, ease: "backOut" }
+        }
+    };
+
     return (
-        <section className="relative bg-white pt-16">
+        <section className="relative bg-white pt-16 overflow-hidden">
             {/* Header Content */}
             <div className="container mx-auto px-6 relative z-10">
                 <div className="flex flex-col lg:flex-row justify-between items-end pb-12">
-                    <div className="max-w-5xl">
+                    <div className="max-w-5xl" ref={titleRef}>
                         <h1 className="text-7xl md:text-9xl lg:text-[130px] font-forum leading-[0.85] text-secondary tracking-tight">
-                            Justice. Advocacy.<br />
-                            <div className="text-primary md:mt-8">Results.</div>
+                            <div className="overflow-hidden inline-block mr-4">
+                                <span className="animate-word inline-block">Justice.</span>
+                            </div>
+                            <div className="overflow-hidden inline-block">
+                                <span className="animate-word inline-block">Advocacy.</span>
+                            </div>
+                            <br />
+                            <div className="text-primary md:mt-8 overflow-hidden">
+                                <span className="animate-word inline-block">Results.</span>
+                            </div>
                         </h1>
                     </div>
 
                     {/* Rotating Circular Text */}
-                    <div className="relative mb-8 lg:mb-12 hidden md:block">
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={rotatingTextVariants}
+                        className="relative mb-8 lg:mb-12 hidden md:block"
+                    >
                         <div className="w-44 h-44 animate-[spin_25s_linear_infinite] flex items-center justify-center">
                             <svg viewBox="0 0 100 100" className="w-full h-full">
                                 <defs>
@@ -33,40 +92,36 @@ const Hero = () => {
                             </svg>
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-primary/20 rounded-full"></div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 
             {/* Social Links Sidebar & Image Section */}
             <div className="container mx-auto px-6 relative mt-12">
                 {/* Social Sidebar */}
-                <div className="hidden xl:flex flex-col items-center absolute -left-20 top-1/2 -translate-y-1/2 z-20">
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={sidebarVariants}
+                    className="hidden xl:flex flex-col items-center absolute -left-20 top-1/2 -translate-y-1/2 z-20"
+                >
                     <div className="flex flex-col gap-10 text-[13px] uppercase tracking-[0.2em] font-medium text-black">
-                        <a href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
-                            Dribbble
-                            <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
-                        </a>
-                        <a href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
-                            Behance
-                            <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
-                        </a>
-                        <a href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
-                            Github
-                            <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
-                        </a>
-                        <a href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
-                            Linkedin
-                            <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
-                        </a>
-                        <a href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
-                            Facebook
-                            <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
-                        </a>
+                        {['Dribbble', 'Behance', 'Github', 'Linkedin', 'Facebook'].map((social) => (
+                            <a key={social} href="" className="inline-block hover:text-primary active:text-primary transition-all duration-300 vertical-text hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 relative group">
+                                {social}
+                                <span className="absolute -left-2 top-0 w-0.5 h-0 group-hover:h-full bg-primary transition-all duration-300"></span>
+                            </a>
+                        ))}
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Hero Image */}
-                <div className="w-full h-[450px] md:h-[650px] lg:h-[800px] relative overflow-hidden">
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={imageVariants}
+                    className="w-full h-[450px] md:h-[650px] lg:h-[800px] relative overflow-hidden"
+                >
                     <div className="relative w-full h-full">
                         <Image
                             src="/images/hero.png"
@@ -78,7 +133,7 @@ const Hero = () => {
                         {/* Subtle transition overlay */}
                         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white to-transparent opacity-60"></div>
                     </div>
-                </div>
+                </motion.div>
             </div>
 
             <style jsx>{`
@@ -92,3 +147,4 @@ const Hero = () => {
 };
 
 export default Hero;
+

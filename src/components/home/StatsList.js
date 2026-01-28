@@ -1,5 +1,8 @@
+"use client";
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const StatsList = () => {
     const listItems = [
@@ -37,12 +40,39 @@ const StatsList = () => {
         }
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.15 }
+        }
+    };
+
+    const rowVariants = {
+        hidden: { opacity: 0, x: -30 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.8, ease: "easeOut" }
+        }
+    };
+
     return (
-        <section className="py-24 bg-white">
+        <section className="py-24 bg-white overflow-hidden">
             <div className="container mx-auto px-6">
-                <div className="flex flex-col space-y-0">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    variants={containerVariants}
+                    className="flex flex-col space-y-0"
+                >
                     {listItems.map((item, idx) => (
-                        <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 gap-8 py-10 items-center border-b border-gray-100 last:border-0 hover:bg-[#FAF9F6] transition-all group">
+                        <motion.div
+                            key={idx}
+                            variants={rowVariants}
+                            className="grid grid-cols-1 lg:grid-cols-12 gap-8 py-10 items-center border-b border-gray-100 last:border-0 hover:bg-[#FAF9F6] transition-all group"
+                        >
                             {/* Stat Column */}
                             <div className="lg:col-span-3 space-y-1">
                                 <div className="flex items-baseline gap-2">
@@ -55,7 +85,7 @@ const StatsList = () => {
                             {/* Image & Title Column */}
                             <div className="lg:col-span-4 flex items-center gap-6">
                                 <div className="relative w-20 h-24 rounded-2xl overflow-hidden shrink-0">
-                                    <Image src={item.img} alt={item.title} fill className="object-cover" />
+                                    <Image src={item.img} alt={item.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
                                 </div>
                                 <h4 className="text-2xl font-forum text-secondary leading-tight">{item.title}</h4>
                             </div>
@@ -73,12 +103,13 @@ const StatsList = () => {
                                     </svg>
                                 </Link>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
 };
 
 export default StatsList;
+

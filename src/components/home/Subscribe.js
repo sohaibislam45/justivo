@@ -1,11 +1,19 @@
 'use client';
+import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const Subscribe = () => {
     return (
         <section className="bg-[#F9F3F0] py-16 relative overflow-hidden">
             <div className="container mx-auto px-6 relative z-10">
-                <div className="max-w-[700px] mx-auto flex flex-col md:flex-row items-center border-b border-primary/20 pb-2">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="max-w-[700px] mx-auto flex flex-col md:flex-row items-center border-b border-primary/20 pb-2"
+                >
                     <input
                         type="email"
                         placeholder="Enter you email.."
@@ -30,11 +38,17 @@ const Subscribe = () => {
                             />
                         </svg>
                     </Link>
-                </div>
+                </motion.div>
             </div>
 
             {/* Decorative SVG Line */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 opacity-20 pointer-events-none">
+            <motion.div
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 0.2, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 pointer-events-none"
+            >
                 <svg
                     width="400"
                     height="100"
@@ -51,9 +65,10 @@ const Subscribe = () => {
                     />
                     <circle cx="390" cy="10" r="2" fill="#BE7D60" />
                 </svg>
-            </div>
+            </motion.div>
         </section>
     );
 };
 
 export default Subscribe;
+
