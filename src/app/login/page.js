@@ -38,8 +38,15 @@ export default function Login() {
             await googleSignIn();
             router.push('/dashboard');
         } catch (err) {
-            console.error(err);
-            setError('Failed to sign in with Google.');
+            console.error("Google Sign-In Error:", err);
+            // Provide more specific feedback if possible
+            if (err.code === 'auth/unauthorized-domain') {
+                setError('This domain is not authorized in Firebase. Please add it to your Authorized Domains.');
+            } else if (err.code === 'auth/popup-blocked') {
+                setError('Sign-in popup was blocked. Please allow popups for this site.');
+            } else {
+                setError('Failed to sign in with Google. Check the console for more details.');
+            }
         } finally {
             setIsLoading(false);
         }
