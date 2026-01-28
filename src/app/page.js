@@ -9,6 +9,7 @@ import CaseStudies from "@/components/home/CaseStudies";
 import Team from "@/components/home/Team";
 import ActionBanner from "@/components/home/ActionBanner";
 import StatsList from "@/components/home/StatsList";
+import HomeContact from "@/components/home/HomeContact";
 import InternsAndContact from "@/components/home/InternsAndContact";
 import News from "@/components/home/News";
 import Footer from "@/components/layout/Footer";
@@ -28,6 +29,7 @@ export default function Home() {
         <Team />
         <ActionBanner />
         <StatsList />
+        <HomeContact />
         <News />
       </main>
       <Footer />
