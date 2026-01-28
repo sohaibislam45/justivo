@@ -62,12 +62,12 @@ const HomeContact = () => {
                         </div>
 
                         <div className="pt-8">
-                            <button className="px-8 py-3 border border-gray-200 text-primary text-sm tracking-widest hover:bg-gray-50 transition-all flex items-center gap-3 group">
+                            <Link href="#" className="px-8 py-3 border border-gray-200 text-primary text-sm tracking-widest hover:bg-gray-50 transition-all inline-flex items-center gap-3 group">
                                 Read More
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="transform rotate-45 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                                     <path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-                            </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -130,9 +130,9 @@ const HomeContact = () => {
                                 </div>
 
                                 <div className="pt-6">
-                                    <button className="bg-secondary text-white px-10 py-5 text-sm tracking-widest hover:bg-black transition-all">
+                                    <Link href="#" className="inline-block transition-transform hover:translate-x-0.5 hover:-translate-y-0.5 bg-secondary text-white px-10 py-5 text-sm tracking-widest hover:bg-black/60 transition-all">
                                         Send Message
-                                    </button>
+                                    </Link>
                                 </div>
                             </form>
                         </div>

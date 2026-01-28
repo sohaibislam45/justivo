@@ -12,6 +12,7 @@ import StatsList from "@/components/home/StatsList";
 import HomeContact from "@/components/home/HomeContact";
 import InternsAndContact from "@/components/home/InternsAndContact";
 import News from "@/components/home/News";
+import Subscribe from "@/components/home/Subscribe";
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
         <StatsList />
         <HomeContact />
         <News />
+        <Subscribe />
       </main>
       <Footer />
     </div>
